@@ -18,16 +18,5 @@ class RegistrationController extends Controller
         $user->save();
         return redirect('/login');
     }
-
-    public function memberRegi(NewRegi $request){
-        $user = new User;
-        $columns = ['name','kana','phone','email','role','password'];
-
-        foreach($columns as $column){
-            $user->$column = $request->$column;
-        }
-        $user->save();
-
-        return view('index')->with('message','登録が完了しました。');
-    }
+       
 }

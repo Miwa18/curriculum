@@ -19,12 +19,12 @@
                     @endforeach
                 </div>
                 @endif
-                <form class="mx-1 mx-md-4" action="{{route('member.regi')}}" method="POST">
+                <form class="mx-1 mx-md-4" action="{{route('store')}}" method="POST">
                 @csrf
                     <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                            <input type="text" id="form3Example1c" class="form-control" name="name" />
+                            <input type="text" id="form3Example1c" class="form-control" name="name" value="{{old('name')}}" />
                             <label class="form-label" for="form3Example1c">名前</label>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                            <input type="text" id="form3Example1c" class="form-control" name="kana" />
+                            <input type="text" id="form3Example1c" class="form-control" name="kana" value="{{old('kana')}}" />
                             <label class="form-label" for="form3Example1c">フリガナ</label>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                            <input type="tel" id="typePhone" class="form-control" name="phone" />
+                            <input type="tel" id="typePhone" class="form-control" name="phone" value="{{old('phone')}}" />
                             <label class="form-label" for="typePhone">電話番号</label>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" class="form-control" name="email" />
+                      <input type="email" id="form3Example3c" class="form-control" name="email" value="{{old('email')}}"/>
                       <label class="form-label" for="form3Example3c">メールアドレス</label>
                     </div>
                   </div>
@@ -88,8 +88,7 @@
               </div>
               <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                  class="img-fluid" alt="Sample image">
+                <img src="/images/draw1.png" class="img-fluid" alt="Sample image">
 
               </div>
             </div>

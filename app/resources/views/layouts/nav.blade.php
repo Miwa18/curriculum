@@ -5,7 +5,7 @@
     <!-- Navbar brand -->
     <a class="navbar-brand me-2" href="https://mdbgo.com/">
       <img
-        src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+        src="/images/mdb.png"
         height="16"
         alt="MDB Logo"
         loading="lazy"

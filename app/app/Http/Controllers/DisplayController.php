@@ -15,14 +15,13 @@ class DisplayController extends Controller
     }
     
     public function logIn(){
-        return view('index');
+        return view('manager/index');
     }
     public function logOut(){
         return view('auth/login');
     }
-    
-    public function member(){
-        return view('auth/member');
-    }
 
+    public function postCreate(){
+        return view('manager/post');
+    }
 }
