@@ -79,10 +79,10 @@ return [
     'max' => [
         'numeric' => 'The :attribute may not be greater than :max.',
         'file' => 'The :attribute may not be greater than :max kilobytes.',
-        'string' => 'The :attribute may not be greater than :max characters.',
+        'string' => ':attribute は :max 文字以下で入力してください。',
         'array' => 'The :attribute may not have more than :max items.',
     ],
-    'mimes' => 'The :attribute must be a file of type: :values.',
+    'mimes' => ':attribute の種類は以下のタイプである必要があります。: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
@@ -152,6 +152,10 @@ return [
         'email' => 'メールアドレス',
         'phone' => '電話番号',
         'password' => 'パスワード',
+        'date' => '日付',
+        'title' => 'タイトル',
+        'text' => 'コメント',
+        'image' => '画像',
     ],
 
 ];
