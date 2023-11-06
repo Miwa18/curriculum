@@ -27,7 +27,7 @@ class PostRequest extends FormRequest
             'date' => 'required|date',
             'title' => 'required|max:20',
             'text' => 'required|max:100',
-            'image' => 'image|mimes:jpeg,jpg,png',
+            'image' => 'file|mimes:jpeg,jpg,png,pdf,gif,svg',
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Posting;
 
 class DisplayController extends Controller
 {
@@ -15,8 +16,13 @@ class DisplayController extends Controller
     }
     
     public function logIn(){
-        return view('manager/index');
+        $posting = Posting::orderBy('id','desc')->take(3)->get()->toArray();
+
+        return view('manager/index',[
+            'postDatas' => $posting,
+        ]);
     }
+
     public function logOut(){
         return view('auth/login');
     }

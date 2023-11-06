@@ -19,19 +19,19 @@
                     @csrf
                         <!-- Date input -->
                         <div class="form-outline mb-4">
-                            <input type="date" id="form4Example1" class="form-control" name="date" />
+                            <input type="date" id="form4Example1" class="form-control" name="date" value="{{old('date')}}" />
                             <label class="form-label" for="form4Example1">日付</label>
                         </div>
 
                         <!-- title input -->
                         <div class="form-outline mb-4">
-                            <input type="text" id="form4Example2" class="form-control" name="title" />
+                            <input type="text" id="form4Example2" class="form-control" name="title" value="{{old('title')}}" />
                             <label class="form-label" for="form4Example2">タイトル</label>
                         </div>
 
                         <!-- Message input -->
                         <div class="form-outline mb-4">
-                            <textarea class="form-control" id="form4Example3" rows="4" name="text" ></textarea>
+                            <textarea class="form-control" id="form4Example3" rows="4" name="text" >{{old('text')}}</textarea>
                             <label class="form-label" for="form4Example3">コメント</label>
                         </div>
 
