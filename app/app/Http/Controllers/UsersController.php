@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use App\Http\Requests\NewRegi;
 
 class UsersController extends Controller
@@ -45,10 +46,11 @@ class UsersController extends Controller
 
         if($result){
             session()->flash('flash.success','登録が成功しました。');
+            return redirect(route('main'));;
         }else{
             session()->flash('flash.error','登録に失敗しました。');
+            return redirect()->back()->withInput();
         }
-        return view('manager/index');
     }
 
     /**

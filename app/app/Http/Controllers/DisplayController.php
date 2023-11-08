@@ -30,4 +30,20 @@ class DisplayController extends Controller
     public function postCreate(){
         return view('manager/post');
     }
+    
+    public function mainPage(){
+        $posting = Posting::orderBy('id','desc')->take(3)->get()->toArray();
+        return view('manager/index',[
+            'postDatas' => $posting,
+        ]);
+    }
+
+    public function postAddAjax(Request $request){
+        $nowCount = $request->input('nowCount');
+        $start = $nowCount + 1;
+        $end = $nowCount +4;
+
+        $data = Posting::orderBy('id','desc')->skip($start)->take($end-$start)->get();
+        return response()->json(['data'=> $data]);  
+    }
 }

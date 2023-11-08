@@ -28,24 +28,35 @@ class RegistrationController extends Controller
     }
     
     public function post(PostRequest $request){
-        $posting = new Posting;
-
         $image = $request->file('image');
         $path = isset($image) ? $image->store('items','public') : '';
 
-        $columns = ['date','title','text'];
-        foreach($columns as $column){
-            $posting->$column = $request->$column;
-        }
-        $posting->image = $path;
-        $result = $posting->save();
+        $result = Posting::create([
+            'date' => $request->date,
+            'title' => $request->title,
+            'text' => $request->text,
+            'image' => $path,
+        ]);
 
         if($result){
             session()->flash('flash.success','投稿が成功しました。');
-            return view('manager/index');
+            return redirect(route('main'));;
         }else{
             session()->flash('flash.error','投稿登録に失敗しました。');
             return redirect()->back()->withInput();
         }
+    }
+
+    public function postDele(int $id){
+        $result = Posting::find($id);
+        $result->delete();
+
+        if($result){
+            session()->flash('flash.success','投稿を削除しました。');
+            return redirect(route('main'));
+        }else{
+            session()->flash('flash.error','削除に失敗しました。');
+        }
+        
     }
 }
