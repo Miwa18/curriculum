@@ -40,7 +40,7 @@ class DisplayController extends Controller
 
     public function postAddAjax(Request $request){
         $nowCount = $request->input('nowCount');
-        $start = $nowCount + 1;
+        $start = $nowCount;
         $end = $nowCount +4;
 
         $data = Posting::orderBy('id','desc')->skip($start)->take($end-$start)->get();

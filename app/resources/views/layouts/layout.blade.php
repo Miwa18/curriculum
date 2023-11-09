@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>shift</title>
-    <!--jquery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--csrf token -->
     <meta name="csrf-token" content="{{csrf_token()}}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- MDB icon -->
     <link rel="icon" href="{{asset('img/mdb-favicon.ico')}}" type="image/x-icon" />
     <!-- Font Awesome -->
@@ -37,12 +37,11 @@
     
     @yield('content')
     <!-- End your project here-->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- MDB -->
-    <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
-    <!-- Ajax -->
-    <script type="text/javascript" src="{{asset('js/ajax.js')}}" >
-    <!-- Custom scripts -->
+    <script type="text/javascript" src="{{asset
+('js/mdb.min.js')}}"></script> 
+  <!-- Custom scripts -->
     <script type="text/javascript"></script>
   </body>
 </html>

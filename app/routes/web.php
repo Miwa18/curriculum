@@ -27,4 +27,4 @@ Route::get('/post_create',[DisplayController::class,'postCreate'])->name('post.c
 Route::post('/post',[RegistrationController::class,'post'])->name('post');
 Route::get('/main',[DisplayController::class,'mainPage'])->name('main');
 Route::get('post_delete/{id}',[RegistrationController::class,'postDele'])->name('post.delete');
-Route::post('/post/ajax',[DisplayController::class,'postAddAjax']);
+Route::post('/post/ajax',[DisplayController::class,'postAddAjax'])->name('postAj');
