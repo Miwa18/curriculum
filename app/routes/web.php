@@ -22,7 +22,7 @@ Route::get('/new', [DisplayController::class,'new']);
 Route::post('/new',[RegistrationController::class,'newRegister'])->name('new.registration');
 Route::post('/login',[DisplayController::class,'logIn'])->name('login');
 Route::post('/logout',[DisplayController::class,'logOut'])->name('logout');
-Route::resource('/shift/user','UsersController',['only' => ['create','store']]);
+Route::resource('/shift/user','UsersController',['only' => ['index','create','store','destroy']]);
 Route::get('/post_create',[DisplayController::class,'postCreate'])->name('post.create');
 Route::post('/post',[RegistrationController::class,'post'])->name('post');
 Route::get('/main',[DisplayController::class,'mainPage'])->name('main');

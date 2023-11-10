@@ -15,7 +15,10 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::all()->toArray();
+        return view('/manager/member_edit',[
+            'users' => $user,
+        ]);
     }
 
     /**
@@ -95,6 +98,15 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $result = User::find($id);
+        $result->delete();
+        
+        if($result){
+            session()->flash('flash.success','ユーザーを削除しました。');
+            return view('/manager/member_edit');
+        }else{
+            session()->flash('flash.error','ユーザーの削除に失敗しました。');
+        }
+        
     }
 }

@@ -5,7 +5,7 @@
 <div class="list-group list-group-light">
   <a href="/shift/user/create" class="list-group-item list-group-item-action px-3 border-0 active" aria-current="true">
     従業員登録へ</a>
-  <a href="#" class="list-group-item list-group-item-action px-3 border-0">従業員編集・削除</a>
+  <a href="/shift/user" class="list-group-item list-group-item-action px-3 border-0">従業員編集・削除</a>
   <a href="#" class="list-group-item list-group-item-action px-3 border-0">シフト作成</a>
   <a href="{{route('post.create')}}" class="list-group-item list-group-item-action px-3 border-0">お知らせ投稿作成へ</a>
   <div class="card mb-3 w-75 mx-auto" id="postScroll" >
@@ -25,12 +25,13 @@
     </div>
     @endforeach
     @endif
+    <input type="hidden" id="count" value="3">
     <button class="past"> 以前の投稿 </button>
     <script type="text/javascript">
     let nowCount =3;
-
+const element = document.getElementById('postScroll');
 $('.past').on('click',function(){
-        const nowCount = 3; 
+        var nowCount = $("#count").val();
         $.ajax({
             headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
             url: "{{route('postAj')}}",
@@ -39,7 +40,7 @@ $('.past').on('click',function(){
         data:{nowCount:nowCount},
         })
         .done(function(data){
-            data.data.forEach(function(postData){
+            data.post.forEach(function(postData){
                 alert("success");
                 var cardHtml = 
                 `<div class="card-body">
@@ -49,13 +50,14 @@ $('.past').on('click',function(){
                 <h5 class="card-title">${postData.title}</h5>
                   <p class="card-text">${postData.text}</p>
                   <p class="card-text">
-                  ${postData.image !== "" ? `<img src="${postData.image}" class="card-img-bottom" alt="写真" width="30%">` : ''}
+                  ${postData.image !== "" ? `<img src="/storage/app/public/items/${postData.image}" class="card-img-bottom" alt="写真" width="30%">` : ''}
                   </p>
                 </div>`;
         
             $('#postScroll').append(cardHtml);
-            });
             nowCount += 3;
+            $("#count").val(nowCount);
+            });
         })
         .fail(function(XMLHttpRequest,textStatus,errorThrown){
             alert(errorThrown);

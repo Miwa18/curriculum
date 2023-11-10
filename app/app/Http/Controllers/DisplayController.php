@@ -43,7 +43,7 @@ class DisplayController extends Controller
         $start = $nowCount;
         $end = $nowCount +4;
 
-        $data = Posting::orderBy('id','desc')->skip($start)->take($end-$start)->get();
-        return response()->json(['data'=> $data]);  
+        $post = Posting::orderBy('id','desc')->skip($start)->take($end-$start-1)->get();
+        return response()->json(['post'=> $post]);  
     }
 }
