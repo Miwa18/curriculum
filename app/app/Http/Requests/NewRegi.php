@@ -26,7 +26,7 @@ class NewRegi extends FormRequest
         return [
             'name' => 'required|max:20',
             'kana' => 'required|max:30',
-            'email' => 'required|unique:users|email:dns',
+            'email' => 'required|email:dns|unique:user',
             'phone' => 'nullable|regex:/^[0-9]+$/i|max:11',
             'password' => 'required|confirmed'
         ];

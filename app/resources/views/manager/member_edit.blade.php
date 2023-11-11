@@ -24,11 +24,13 @@
       <td>
         <p class="fw-normal mb-1">{{$user['email']}}</p>
       </td>
-      <td><a href="#">編集<a></td>
+      <td><a href="/shift/user/{{$user['id']}}/edit">編集<a></td>
       <td>
-      <a href="/shift/user/{user}" onclick="return confirm('本当に削除しますか？')">
-          削除
-      </a>
+        <from action="{{route('user.destroy',$user['id'])}}" method="POST">
+          @csrf
+          @method('DELETE')
+      <input type="submit" value="削除" onclick="return confirm('本当に削除しますか？');">
+        </form>
       </td>
     </tr>
     @endforeach
