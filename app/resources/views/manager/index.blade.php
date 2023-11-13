@@ -10,27 +10,29 @@
   <a href="{{route('post.create')}}" class="list-group-item list-group-item-action px-3 border-0">お知らせ投稿作成へ</a>
   <div class="card mb-3 w-75 mx-auto" id="postScroll" >
     <h5>お知らせ</h5>
-    @if($postDatas ?? '')
-    @foreach($postDatas as $postData)
-    <div class="card-body">
-      <p>{{$postData['date']}}
-        <a href="{{route('post.delete',['id' => $postData['id']])}}" onclick="return confirm('本当に削除しますか？')">削除</a>
-      </p>
-      <h5 class="card-title">{{$postData['title']}}</h5>
-        <p class="card-text">{{$postData['text']}}</p>
-      <p class="card-text">
-        @if($postData['image'] !=='')
-        <img src="{{\Storage::url($postData['image'])}}" class="card-img-bottom" alt="写真" width="30%" />
-        @endif
+    <div id="dataMenu">
+      @if($postDatas ?? '')
+      @foreach($postDatas as $postData)
+      <div class="card-body">
+        <p>{{$postData['date']}}
+          <a href="{{route('post.delete',['id' => $postData['id']])}}" onclick="return confirm('本当に削除しますか？')">削除</a>
+        </p>
+        <h5 class="card-title">{{$postData['title']}}</h5>
+          <p class="card-text">{{$postData['text']}}</p>
+          <p class="card-text">
+            @if($postData['image'] !=='')
+            <img src="{{\Storage::url($postData['image'])}}" class="card-img-bottom" alt="写真" width="30%" />
+            @endif
+      </div>
+      @endforeach
+      @endif
     </div>
-    @endforeach
-    @endif
     <input type="hidden" id="count" value="3">
-    <button class="past"> 以前の投稿 </button>
+    <button type="button" class="btn btn-info" id="past">以前の投稿</button>
+  </div>
+
     <script type="text/javascript">
-    let nowCount =3;
-const element = document.getElementById('postScroll');
-$('.past').on('click',function(){
+      $('#past').on('click',function(){
         var nowCount = $("#count").val();
         $.ajax({
             headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
@@ -41,7 +43,6 @@ $('.past').on('click',function(){
         })
         .done(function(data){
             data.post.forEach(function(postData){
-                alert("success");
                 var cardHtml = 
                 `<div class="card-body">
                 <p>${postData.date}
@@ -54,7 +55,7 @@ $('.past').on('click',function(){
                   </p>
                 </div>`;
         
-            $('#postScroll').append(cardHtml);
+            $('#dataMenu').append(cardHtml);
             nowCount += 3;
             $("#count").val(nowCount);
             });
@@ -64,7 +65,6 @@ $('.past').on('click',function(){
         });
 });
 </script>
-  </div>
 
 </div>
 </div>

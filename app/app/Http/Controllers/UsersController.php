@@ -73,7 +73,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $user = User::find($id);
         return view('/manager/member_edit2',[
@@ -91,16 +91,11 @@ class UsersController extends Controller
     public function update(NewRegi $request, $id)
     {
         $user = User::find($id);
-        $columns = ['name','kana','phone','email','role','password'];
-
-        foreach($columns as $column){
-            $user->$column = $request->$column;
-        }
-        $result = $user->save();
+       $result= $user->fill($request->all())->save();
 
         if($result){
             session()->flash('flash.success','変更が成功しました。');
-            return redirect(route('shift/user'));;
+            return redirect(route('user.index'));;
         }else{
             session()->flash('flash.error','変更に失敗しました。');
             return redirect()->back()->withInput();
@@ -115,12 +110,11 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $result = User::find($id);
-        $result->delete();
-
+        $user = User::find($id);
+        $result = $user->forceDelete();
         if($result){
             session()->flash('flash.success','ユーザーを削除しました。');
-            return view('/manager/member_edit');
+            return redirect()->route('user.index');
         }else{
             session()->flash('flash.error','ユーザーの削除に失敗しました。');
         }

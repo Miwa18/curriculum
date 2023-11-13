@@ -19,13 +19,14 @@
                     @endforeach
                 </div>
                 @endif
-                <form class="mx-1 mx-md-4" action="/shift/user/{user}" method="POST" >
+                <form class="mx-1 mx-md-4" action="{{route('user.update',$user['id'])}}" method="POST" >
                 @csrf
                 @method('PUT')
+                    <input type="hidden" name="id" value="{{$user['id']}}">
                     <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                            <input type="text" id="form3Example1c" class="form-control" name="name" value="{{$user['name']}}" />
+                            <input type="text" id="form3Example1c" class="form-control" name="name" value="{{old('name',$user['name'])}}" />
                             <label class="form-label" for="form3Example1c">名前</label>
                         </div>
                     </div>
@@ -33,15 +34,15 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                            <input type="text" id="form3Example1c" class="form-control" name="kana" value="{{$user['kana']}}" />
-                            <label class="form-label" for="form3Example1c">フリガナ</label>
+                            <input type="text" id="form3Example2c" class="form-control" name="kana" value="{{old('kana',$user['kana'])}}" />
+                            <label class="form-label" for="form3Example2c">フリガナ</label>
                         </div>
                     </div>
 
                     <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
-                            <input type="tel" id="typePhone" class="form-control" name="phone" value="{{$user['phone']}}" />
+                            <input type="tel" id="typePhone" class="form-control" name="phone" value="{{old('phone',$user['phone'])}}" />
                             <label class="form-label" for="typePhone">電話番号</label>
                         </div>
                     </div>
@@ -49,7 +50,7 @@
                   <div class="d-flex flex-row align-items-center mb-4">
                     <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                     <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" class="form-control" name="email" value="{{$user['email']}}"/>
+                      <input type="email" id="form3Example3c" class="form-control" name="email" value="{{old('email',$user['email'])}}"/>
                       <label class="form-label" for="form3Example3c">メールアドレス</label>
                     </div>
                   </div>
@@ -69,7 +70,6 @@
                       <label class="form-label" for="form3Example4cd">パスワード（確認用）</label>
                     </div>
                   </div>
-
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="1" />
                         <label class="form-check-label" for="inlineRadio1">管理者</label>
@@ -80,6 +80,7 @@
                     <label class="form-check-label" for="inlineRadio2">一般ユーザー</label>
                     </div>
 
+                  
                   <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <button type="submit" class="btn btn-primary btn-lg">更新</button>
                   </div>

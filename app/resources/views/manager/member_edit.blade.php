@@ -26,10 +26,12 @@
       </td>
       <td><a href="/shift/user/{{$user['id']}}/edit">編集<a></td>
       <td>
-        <from action="{{route('user.destroy',$user['id'])}}" method="POST">
-          @csrf
-          @method('DELETE')
-      <input type="submit" value="削除" onclick="return confirm('本当に削除しますか？');">
+        <form action="{{route('user.destroy',$user['id'])}}" method="post">
+        @method('DELETE')  
+        @csrf
+        <button type="submit" onclick="return confirm('本当に削除しますか？')">
+        削除
+        </button>
         </form>
       </td>
     </tr>
