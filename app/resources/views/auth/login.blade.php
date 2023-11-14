@@ -18,7 +18,7 @@
             @csrf
           <!-- Email input -->
           <div class="form-outline mb-4">
-            <input type="email" id="form1Example13" class="form-control form-control-lg" name="email" autocomplete="email"/>
+            <input type="email" id="form1Example13" class="form-control form-control-lg" name="email" autocomplete="email" value="{{old('email')}}"/>
             <label class="form-label" for="form1Example13">メールアドレス</label>
           </div>
 

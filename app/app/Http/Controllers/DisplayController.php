@@ -8,26 +8,18 @@ use App\Posting;
 
 class DisplayController extends Controller
 {
-    public function firstPage(){
-        return view('auth/login');
-    }
     public function new(){
         return view('auth/newRegistration');
     }
-    public function login(Request $request){
+    public function logIn(){
         $posting = Posting::orderBy('id','desc')->take(3)->get()->toArray();
         $user = Auth::user();
         
-        if($user->role == 0){
            return view('member/main',[
             'postDatas' => $posting,
            ]); 
-        }elseif($user->role == 1){
-            return view('manager/index',[
-            'postDatas' => $posting,
-        ]);
-        }  
-    }
+        }
+        
     public function logOut(){
         return view('auth/login');
     }
