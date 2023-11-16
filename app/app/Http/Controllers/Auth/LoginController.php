@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -39,13 +40,6 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
- 
     
-    protected function authenticated(Request $request,$user){
-        if($user->role == 0){
-            return redirect()->route('logIn');
-        }elseif($user->role == 1){
-            return redirect()->route('main');
-        }
-    }
+
 }

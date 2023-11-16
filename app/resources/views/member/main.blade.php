@@ -3,7 +3,7 @@
 @include('layouts.nav')
 <div class="text-center">
 <div class="list-group list-group-light">
-  <a href="#" class="list-group-item list-group-item-action px-3 border-0 active" aria-current="true">
+  <a href="{{route('user.show',['id' => $user['id']])}}" class="list-group-item list-group-item-action px-3 border-0 active" aria-current="true">
     ユーザー情報確認</a>
   <a href="#" class="list-group-item list-group-item-action px-3 border-0">シフト希望提出</a>
   <a href="#" class="list-group-item list-group-item-action px-3 border-0">シフト確認へ</a>

@@ -5,19 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Posting;
+use Illuminate\Support\Facades\Auth;
 
 class DisplayController extends Controller
 {
-    public function new(){
-        return view('auth/newRegistration');
+    public function start(){
+        return redirect()->route('login');
     }
+
     public function logIn(){
         $posting = Posting::orderBy('id','desc')->take(3)->get()->toArray();
         $user = Auth::user();
-        
+        if($user->role == 0){
            return view('member/main',[
             'postDatas' => $posting,
+            'user' => $user,
            ]); 
+        }elseif($user->role == 1){
+            return view('manager/index',[
+                'postDatas' => $posting,
+                'user' => $user,
+            ]);
+        }
         }
         
     public function logOut(){

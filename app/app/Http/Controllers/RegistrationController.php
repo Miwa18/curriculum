@@ -26,7 +26,7 @@ class RegistrationController extends Controller
             return redirect()->back()->withInput();
         }
     }
-    
+       
     public function post(PostRequest $request){
         $image = $request->file('image');
         $path = isset($image) ? $image->store('items','public') : '';

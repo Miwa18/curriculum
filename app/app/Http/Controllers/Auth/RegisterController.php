@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\NewRegi;
 
 class RegisterController extends Controller
 {
@@ -69,5 +71,25 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function showRegistrationForm(){
+        return view('auth.newRegistration');
+    }
+    public function register(NewRegi $request){
+        $user = new User;
+        $columns = ['name','kana','phone','email','role','password'];
+        
+        foreach($columns as $column){
+            $user->$column = $request->$column;
+        }
+        $result = $user->save();
+        if($result){
+            session()->flash('flash.success','登録が成功しました。');
+            return redirect('login');
+        }else{
+            session()->flash('flash.error','登録に失敗しました。');
+            return redirect()->back()->withInput();
+        }
     }
 }
