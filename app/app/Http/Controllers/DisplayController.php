@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class DisplayController extends Controller
 {
+    //localhost最初にアクセス時にログインページへ誘導
     public function start(){
         return redirect()->route('login');
     }
-
+    //ログイン完了後roleカラムでページ遷移先を分ける
     public function logIn(){
         $posting = Posting::orderBy('id','desc')->take(3)->get()->toArray();
         $user = Auth::user();
@@ -28,10 +29,6 @@ class DisplayController extends Controller
             ]);
         }
         }
-        
-    public function logOut(){
-        return view('auth/login');
-    }
 
     public function postCreate(){
         return view('manager/post');
@@ -51,5 +48,13 @@ class DisplayController extends Controller
 
         $post = Posting::orderBy('id','desc')->skip($start)->take($end-$start-1)->get();
         return response()->json(['post'=> $post]);  
+    }
+    //ユーザー情報編集ページ
+    public function infoEdit(){
+        $user = Auth::user();
+        
+        return view('member/userInfo_edit',[
+            'user' => $user,
+        ]);
     }
 }

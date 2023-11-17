@@ -33,6 +33,7 @@
 
     <script type="text/javascript">
       $('#past').on('click',function(){
+
         var nowCount = $("#count").val();
         $.ajax({
             headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},

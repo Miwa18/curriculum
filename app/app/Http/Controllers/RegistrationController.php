@@ -7,6 +7,8 @@ use App\User;
 use App\Posting;
 use App\Http\Requests\NewRegi;
 use App\Http\Requests\PostRequest;
+use App\Http\Requests\EditUser;
+use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
@@ -58,5 +60,21 @@ class RegistrationController extends Controller
             session()->flash('flash.error','削除に失敗しました。');
         }
         
+    }
+    //ユーザー情報更新処理
+    public function infoEditDone(Request $request){
+        $user = Auth::User();
+        $columns = ['name','kana','phone','email'];
+        foreach($columns as $column){
+            $user->$column = $request->$column;
+        }
+        $result = $user->save();
+        if($result){
+            session()->flash('flash.success','更新が成功しました。');
+            return redirect(route('logIn'));
+        }else{
+            session()->flash('flash.error','更新に失敗しました。');
+            return redirect()->back()->withInput();
+        }
     }
 }

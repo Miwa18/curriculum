@@ -78,11 +78,12 @@ class RegisterController extends Controller
     }
     public function register(NewRegi $request){
         $user = new User;
-        $columns = ['name','kana','phone','email','role','password'];
+        $columns = ['name','kana','phone','email','role'];
         
         foreach($columns as $column){
             $user->$column = $request->$column;
         }
+        $user -> password = Hash::make($request['password']);
         $result = $user->save();
         if($result){
             session()->flash('flash.success','登録が成功しました。');

@@ -30,7 +30,7 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="{{route('main')}}">メインページ</a>
+          <a class="nav-link" href="{{route('logIn')}}">メインページ</a>
         </li>
       </ul>
     
@@ -50,9 +50,12 @@
             document.getElementById('logout-form').submit();
           });
           </script>
-        <button type="button" class="btn btn-primary me-3">
-          ユーザー情報
-        </button>
+          @if(Auth::check())
+          <form action="{{route('user.show',['user' => Auth::user()->id])}}" method="GET">
+           <input type="hidden" name="id" value="{{Auth::user()->id}}">
+           <button type="submit" class="btn btn-primary me-3">ユーザー情報</button>
+          @endif
+        </form>
       </div>
     </div>
     <!-- Collapsible wrapper -->

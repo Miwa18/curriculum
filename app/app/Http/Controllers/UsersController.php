@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests\NewRegi;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -26,6 +28,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //従業員登録ページに遷移
     public function create()
     {
         return view('auth/member');
@@ -37,14 +40,16 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //従業員登録処理
     public function store(NewRegi $request)
     {
         $user = new User;
-        $columns = ['name','kana','phone','email','role','password'];
+        $columns = ['name','kana','phone','email','role'];
 
         foreach($columns as $column){
             $user->$column = $request->$column;
         }
+        $user -> password = Hash::make($request['password']);
         $result = $user->save();
 
         if($result){
@@ -62,9 +67,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //ユーザー情報表示
     public function show($id)
     {
-     //
+     $user = Auth::user();
+     return view('member/userInfo',[
+        'user' => $user,
+     ]);
     }
 
     /**
@@ -73,6 +82,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //従業員編集・削除ページ、従業員一覧表示
     public function edit(int $id)
     {
         $user = User::find($id);
@@ -88,10 +98,16 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //従業員更新処理
     public function update(NewRegi $request, $id)
     {
         $user = User::find($id);
-       $result= $user->fill($request->all())->save();
+        $columns = ['name','kana','phone','email','role'];
+        foreach($columns as $column){
+            $user->$column = $request->$column;
+        }
+        $user->password =  Hash::make($request['password']);
+        $result = $user->save();
 
         if($result){
             session()->flash('flash.success','変更が成功しました。');
@@ -108,6 +124,7 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //従業員削除処理
     public function destroy($id)
     {
         $user = User::find($id);

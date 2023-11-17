@@ -3,8 +3,6 @@
 @include('layouts.nav')
 <div class="text-center">
 <div class="list-group list-group-light">
-  <a href="{{route('user.show',['id' => $user['id']])}}" class="list-group-item list-group-item-action px-3 border-0 active" aria-current="true">
-    ユーザー情報確認</a>
   <a href="#" class="list-group-item list-group-item-action px-3 border-0">シフト希望提出</a>
   <a href="#" class="list-group-item list-group-item-action px-3 border-0">シフト確認へ</a>
   <div class="card mb-3 w-75 mx-auto" id="postScroll" >
@@ -13,9 +11,7 @@
       @if($postDatas ?? '')
       @foreach($postDatas as $postData)
       <div class="card-body">
-        <p>{{$postData['date']}}
-          <a href="{{route('post.delete',['id' => $postData['id']])}}" onclick="return confirm('本当に削除しますか？')">削除</a>
-        </p>
+        <p>{{$postData['date']}}</p>
         <h5 class="card-title">{{$postData['title']}}</h5>
           <p class="card-text">{{$postData['text']}}</p>
         <p class="card-text">
@@ -44,8 +40,7 @@
           data.post.forEach(function(postData){
               var cardHtml = 
               `<div class="card-body">
-              <p>${postData.date}
-              <a href="/post_delete/${postData.id}" onclick="return confirm('本当に削除しますか？')">削除</a></p>
+              <p>${postData.date}</p>
               <h5 class="card-title">${postData.title}</h5>
                 <p class="card-text">${postData.text}</p>
                 <p class="card-text">
