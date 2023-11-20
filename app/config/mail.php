@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'sanlunyoulinai84@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', '三輪有里奈'),
     ],
 
     /*
@@ -119,7 +119,7 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
-
+        
     /*
     |--------------------------------------------------------------------------
     | Log Channel

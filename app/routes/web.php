@@ -29,7 +29,8 @@ Route::group(['middleware' => 'admin'],function(){
     Route::get('/logIn',[DisplayController::class,'logIn'])->name('logIn');  
     Route::get('/info_edit',[DisplayController::class,'infoEdit']);
     Route::post('/info_edit2',[RegistrationController::class,'infoEditDone'])->name('infoEdit.done');
-
-
+    Route::group(['middleware' => 'admin'],function(){
+    Route::get('/user_request',[DisplayController::class,'userRequest'])->name('user.request');
+    });
 Route::post('/post/ajax',[DisplayController::class,'postAddAjax'])->name('postAj');
 });

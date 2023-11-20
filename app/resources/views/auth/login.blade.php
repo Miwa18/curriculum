@@ -36,6 +36,7 @@
 
         </form>
       </div>
+      <a href="{{route('password.request')}}" class="text-body">パスワードを忘れた</a>
     </div>
   </div>
 </section>

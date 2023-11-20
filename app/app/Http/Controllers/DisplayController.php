@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Posting;
+use App\Type;
 use Illuminate\Support\Facades\Auth;
 
 class DisplayController extends Controller
@@ -55,6 +56,16 @@ class DisplayController extends Controller
         
         return view('member/userInfo_edit',[
             'user' => $user,
+        ]);
+    }
+    //シフト希望登録ページへ遷移
+    public function userRequest(){
+        $user = Auth::user();
+        $type = Type::all();
+
+        return view('member/userRequest',[
+            'user' => $user,
+            'types' => $type,
         ]);
     }
 }
