@@ -3,7 +3,7 @@
 @include('layouts.nav')
 <div class="text-center">
 <div class="list-group list-group-light">
-  <a href="user.request" class="list-group-item list-group-item-action px-3 border-0">シフト希望提出</a>
+  <a href="{{route('user.request')}}" class="list-group-item list-group-item-action px-3 border-0">シフト希望提出</a>
   <a href="#" class="list-group-item list-group-item-action px-3 border-0">シフト確認へ</a>
   <div class="card mb-3 w-75 mx-auto" id="postScroll" >
     <h5>お知らせ</h5>
@@ -44,13 +44,13 @@
               <h5 class="card-title">${postData.title}</h5>
                 <p class="card-text">${postData.text}</p>
                 <p class="card-text">
-                  ${postData.image !== "" ? `<img src="/storage/app/public/items/${postData.image}" class="card-img-bottom" alt="写真" width="30%">` : ''}
+                  ${postData.image !== "" ? `<img src="/storage/${postData.image}" class="card-img-bottom" alt="写真" width="30%">` : ''}
                 </p>
               </div>`;
             $('#dataMenu').append(cardHtml);
-            nowCount += 3;
-            $("#count").val(nowCount);
           });
+          nowCount = parseInt(nowCount)+3;
+          $("#count").val(nowCount);
         })
         .fail(function(XMLHttpRequest,textStatus,errorThrown){
             alert(errorThrown);

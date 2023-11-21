@@ -77,4 +77,20 @@ class RegistrationController extends Controller
             return redirect()->back()->withInput();
         }
     }
+    //シフト希望登録処理
+    public function shiftRequest(Request $request){
+        $wish = new Wish;
+        $columns =['user_id','type_id','comment'];
+        foreach($columns as $column){
+            $wish->$column = $request->$column;
+        }
+        $result = $wish->save();
+        if($result){
+            session()->flash('flash.success','登録が成功しました。');
+            return redirect(route('logIn'));
+        }else{
+            session()->flash('flash.error','登録に失敗しました。');
+            return redirect()->back()->withInput();
+        }
+    }
 }

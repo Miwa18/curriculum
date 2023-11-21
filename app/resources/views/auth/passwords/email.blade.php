@@ -18,18 +18,19 @@
                 <form method="POST" action="{{route('password.email')}}">
                     @csrf       
                     <div class="form-group row">
-                    <input type="email" id="typeEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" required autocomplete="email"/>
-                    <label class="form-label" for="typeEmail"></label>
-                    @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        {{$message}}
-                    </span>
+                        <input type="email" id="typeEmail" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" required autocomplete="email"/>
+                        <label class="form-label" for="typeEmail"></label>
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            {{$message}}
+                        </span>
+                        @enderror
                     </div>
-                    @enderror
                     <div class="col-md-6">
-                    <button type="submit" class="btn btn-primary">
-                        パスワードリセットメールを送信
-                    </button>
+                        <button type="submit" class="btn btn-primary">
+                            パスワードリセットメールを送信
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

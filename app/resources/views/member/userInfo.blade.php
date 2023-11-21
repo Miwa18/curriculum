@@ -22,7 +22,7 @@
             >ユーザー情報編集</a>
           <a
             class="btn btn-link m-0 text-reset"
-            href="#"
+            href="{{route('password.request')}}"
             role="button"
             data-ripple-color="primary"
             >パスワード変更</a>

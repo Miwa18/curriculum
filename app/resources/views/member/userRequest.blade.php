@@ -9,18 +9,25 @@
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">シフト登録Form</h3>
             <form method="POST" action="#">
+              @csrf
               <div class="row">
+                <input type="hidden" name="user_id" value="{{$user['id']}}">
                 <div class="col-12">
-                  <select class="select form-control-lg">
+                <label class="form-label select-label">勤務日数</label>
+                    <select name="type_id" class="select form-control-lg">
                     <option value="1" disabled>勤務日数を選択</option>
                     @foreach($types as $type)
                     <option value="{{$type['id']}}">{{$type['name']}}</option>
                     @endforeach
                   </select>
-                  <label class="form-label select-label">勤務日数</label>
+                </div>
+                <div class="col-12" style="width:70%">
+                <p></p>
+                <p>希望する休みの日を以下に選択してください。</p>
+                <multiple-date-picker month="myMonth" ng-model="selectedDates"></multiple-date-picker>
                 </div>
                 <div class="col-12">
-                <multiple-date-picker ng-model="selectedDates"></multiple-date-picker>
+                <textarea class="form-control" id="textAreaExample1" rows="4" name="comment">コメント</textarea>
                 </div>
               </div>
 
@@ -35,5 +42,10 @@
     </div>
   </div>
 </section>
-
+<script>
+  var app= angular.module('myApp',['multipleDatePicker']);
+  moment.locale('ja');
+  $scope.myMounth = moment().add(2,'MONTH');
+  
+</script>
 @endsection

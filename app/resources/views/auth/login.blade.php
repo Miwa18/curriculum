@@ -7,6 +7,11 @@
         <img src="/images/draw2.png" class="img-fluid" alt="Phone image">
       </div>
       <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+        @if(session('status'))
+            <div class="alert alert-success">
+                {{session('status')}}
+            </div>
+        @endif
         @if($errors->any())
         <div class="alert alert-danger">
             @foreach($errors->all() as $message)

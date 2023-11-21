@@ -23,14 +23,17 @@ Route::group(['middleware' => 'admin'],function(){
     Route::get('/post_create',[DisplayController::class,'postCreate'])->name('post.create');
     Route::post('/post',[RegistrationController::class,'post'])->name('post');
     Route::get('post_delete/{id}',[RegistrationController::class,'postDele'])->name('post.delete');
-    Route::resource('/shift/user','UsersController',['only' => ['index','create','store','edit','update','destroy','show']]);
+    Route::resource('/shift/user','UsersController',['only' => ['index','create','store','edit','update','destroy',]]);
 });
 
     Route::get('/logIn',[DisplayController::class,'logIn'])->name('logIn');  
+    Route::resource('/shift/user','UsersController',['only' =>['show',]]);
     Route::get('/info_edit',[DisplayController::class,'infoEdit']);
     Route::post('/info_edit2',[RegistrationController::class,'infoEditDone'])->name('infoEdit.done');
-    Route::group(['middleware' => 'admin'],function(){
+    
+Route::group(['middleware' => 'member'],function(){
     Route::get('/user_request',[DisplayController::class,'userRequest'])->name('user.request');
+    Route::post('/user_request_done',[RegistrationController::class,'shiftRequest'])->name('shift.request');
     });
 Route::post('/post/ajax',[DisplayController::class,'postAddAjax'])->name('postAj');
 });

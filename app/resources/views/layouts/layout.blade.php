@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{str_replace('_','-',app()->getLocale())}}">
+<html lang="{{str_replace('_','-',app()->getLocale())}}" ng-app="myApp">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -24,6 +24,12 @@
     />
     <!-- MDB -->
     <link rel="stylesheet" href="{{asset('css/mdb.min.css')}}" />
+    <!--  MultipleDatePicker  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/multipleDatePicker.css')}}" />
+    <script type="text/javascript" src="{{asset('js/multipleDatePicker.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+
   </head>
   <body>
     <!-- Start your project here-->

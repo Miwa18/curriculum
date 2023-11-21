@@ -36,7 +36,7 @@ class NewRegi extends FormRequest
                 Rule::unique('users')->ignore($userId ?: null),
             ],
             'phone' => 'nullable|regex:/^[0-9]+$/i|max:11',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed|min:8'
         ];
     }
 }

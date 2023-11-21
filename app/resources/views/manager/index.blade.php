@@ -33,7 +33,7 @@
 
     <script type="text/javascript">
       $('#past').on('click',function(){
-
+        
         var nowCount = $("#count").val();
         $.ajax({
             headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
@@ -52,17 +52,18 @@
                 <h5 class="card-title">${postData.title}</h5>
                   <p class="card-text">${postData.text}</p>
                   <p class="card-text">
-                  ${postData.image !== "" ? `<img src="/storage/app/public/items/${postData.image}" class="card-img-bottom" alt="写真" width="30%">` : ''}
+                  ${postData.image !== "" ? `<img src="/storage/${postData.image}" class="card-img-bottom" alt="写真" width="30%">` : ''}
                   </p>
                 </div>`;
         
             $('#dataMenu').append(cardHtml);
-            nowCount += 3;
-            $("#count").val(nowCount);
             });
+            nowCount = parseInt(nowCount)+3;
+            $("#count").val(nowCount);
         })
         .fail(function(XMLHttpRequest,textStatus,errorThrown){
             alert(errorThrown);
+            $('#past').prop('disabled',false);
         });
 });
 </script>

@@ -48,7 +48,7 @@ class DisplayController extends Controller
         $end = $nowCount +4;
 
         $post = Posting::orderBy('id','desc')->skip($start)->take($end-$start-1)->get();
-        return response()->json(['post'=> $post]);  
+        return response()->json(['post'=> $post,]);  
     }
     //ユーザー情報編集ページ
     public function infoEdit(){
