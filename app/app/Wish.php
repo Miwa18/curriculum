@@ -10,7 +10,7 @@ class Wish extends Model
     return $this->belongsTo('App\Type','type_id','id');
    } 
    public function user(){
-    return $this->belongsTo('App\user','user_id','id');
+    return $this->belongsTo('App\User','user_id','id');
    }
 
    protected $fillable = [

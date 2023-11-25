@@ -29,7 +29,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/multipleDatePicker.css')}}" />
     <script type="text/javascript" src="{{asset('js/multipleDatePicker.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ja.js"></script>
   </head>
   <body>
     <!-- Start your project here-->

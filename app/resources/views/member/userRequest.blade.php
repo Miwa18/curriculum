@@ -8,10 +8,9 @@
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
           <div class="card-body p-4 p-md-5">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">シフト登録Form</h3>
-            <form method="POST" action="#">
+            <form method="POST" action="{{route('shift.request')}}">
               @csrf
               <div class="row">
-                <input type="hidden" name="user_id" value="{{$user['id']}}">
                 <div class="col-12">
                 <label class="form-label select-label">勤務日数</label>
                     <select name="type_id" class="select form-control-lg">
@@ -24,17 +23,14 @@
                 <div class="col-12" style="width:70%">
                 <p></p>
                 <p>希望する休みの日を以下に選択してください。</p>
-                <multiple-date-picker month="myMonth" ng-model="selectedDates"></multiple-date-picker>
-                </div>
+                <input type="text" name="dates" id="datepicker" >
                 <div class="col-12">
                 <textarea class="form-control" id="textAreaExample1" rows="4" name="comment">コメント</textarea>
                 </div>
               </div>
-
               <div class="mt-4 pt-2">
                 <input class="btn btn-primary btn-lg" type="submit" value="登録" />
               </div>
-
             </form>
           </div>
         </div>
@@ -42,10 +38,11 @@
     </div>
   </div>
 </section>
-<script>
-  var app= angular.module('myApp',['multipleDatePicker']);
-  moment.locale('ja');
-  $scope.myMounth = moment().add(2,'MONTH');
-  
+  <script>
+    flatpickr("#datepicker",
+    { locale:"ja",
+      dateFormat:"Y-m-d",
+      mode:"multiple",
+    });
 </script>
 @endsection

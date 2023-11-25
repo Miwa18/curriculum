@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Posting;
+use App\Wish;
 use App\Http\Requests\NewRegi;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\EditUser;
@@ -80,9 +81,24 @@ class RegistrationController extends Controller
     //シフト希望登録処理
     public function shiftRequest(Request $request){
         $wish = new Wish;
-        $columns =['user_id','type_id','comment'];
+        $user = Auth::User();
+        $wish->user_id = $user->id;
+        $columns =['type_id','comment'];
         foreach($columns as $column){
             $wish->$column = $request->$column;
+        }
+        $dates = $request->input('dates');
+        if(!is_array($dates)){
+            if($dates !== null){
+                $formatDate = \Carbon\Carbon::createFromFormat('Y-m-d',$dates)->toDateString();
+                $wish->date = $formatDate;
+            }else{}
+        }else{
+        $formatDates = [];
+        foreach($dates as $date){
+        $formatDates[] = \Carbon\Carbon::createFromFormat('Y-m-d',trim($date))->toDateString();
+        }
+        $wish->date = $formatDates;
         }
         $result = $wish->save();
         if($result){
