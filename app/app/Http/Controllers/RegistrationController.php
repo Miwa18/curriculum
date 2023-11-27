@@ -87,20 +87,17 @@ class RegistrationController extends Controller
         foreach($columns as $column){
             $wish->$column = $request->$column;
         }
-        $dates = $request->input('dates');
-        if(!is_array($dates)){
-            if($dates !== null){
-                $formatDate = \Carbon\Carbon::createFromFormat('Y-m-d',$dates)->toDateString();
-                $wish->date = $formatDate;
-            }else{}
+        $dates = $request->input('date');
+        if(!empty($dates)){
+            $formatDates = explode(',',$dates);
+            $formatDates = array_filter(array_map('trim',$formatDates));
+            $wish->date =json_encode($formatDates);
         }else{
-        $formatDates = [];
-        foreach($dates as $date){
-        $formatDates[] = \Carbon\Carbon::createFromFormat('Y-m-d',trim($date))->toDateString();
+            $wish->date = null;
         }
-        $wish->date = $formatDates;
-        }
+
         $result = $wish->save();
+
         if($result){
             session()->flash('flash.success','登録が成功しました。');
             return redirect(route('logIn'));

@@ -23,7 +23,7 @@
                 <div class="col-12" style="width:70%">
                 <p></p>
                 <p>希望する休みの日を以下に選択してください。</p>
-                <input type="text" name="dates" id="datepicker" >
+                <input type="text" name="date" id="datepickr" />
                 <div class="col-12">
                 <textarea class="form-control" id="textAreaExample1" rows="4" name="comment">コメント</textarea>
                 </div>
@@ -39,7 +39,7 @@
   </div>
 </section>
   <script>
-    flatpickr("#datepicker",
+    flatpickr('#datepickr',
     { locale:"ja",
       dateFormat:"Y-m-d",
       mode:"multiple",

@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Posting;
 use App\Type;
+use App\Wish;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DisplayController extends Controller
 {
@@ -67,5 +69,28 @@ class DisplayController extends Controller
             'user' => $user,
             'types' => $type,
         ]);
+    }
+    //シフト作成ページへ遷移
+    public function shiftMain(){
+        return view('manager/shiftMake');
+    }
+    //シフト希望一覧ページへ遷移
+    public function shiftList(){
+        return view('manager/shiftRequest');
+    }
+    //シフト希望の一覧表示　Ajax通信
+    public function search(Request $request){
+        $from = $request->input('from');
+        $until = $request->input('until');
+        $name = $request->input('name');
+
+        $query = DB::table('wishes')->select('*');
+        if($name){
+            $query->where('user_name','like','%'.$name.'%');
+        }
+        $query->whereBetween('created_at',[$from,$until]);
+
+        $results = $query->get();
+        return response()->json(['results' => $results]);
     }
 }

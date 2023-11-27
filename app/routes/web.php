@@ -24,6 +24,9 @@ Route::group(['middleware' => 'admin'],function(){
     Route::post('/post',[RegistrationController::class,'post'])->name('post');
     Route::get('post_delete/{id}',[RegistrationController::class,'postDele'])->name('post.delete');
     Route::resource('/shift/user','UsersController',['only' => ['index','create','store','edit','update','destroy',]]);
+    Route::get('/shift_make',[DisplayController::class,'shiftMain'])->name('shift.main');
+    Route::get('/shift_list',[DisplayController::class,'shiftList'])->name('shift.list');
+    Route::post('list_search',[DisplayController::class,'search'])->name('list.search');
 });
 
     Route::get('/logIn',[DisplayController::class,'logIn'])->name('logIn');  
