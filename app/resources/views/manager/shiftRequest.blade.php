@@ -8,15 +8,15 @@
 <form id="searchForm" action="{{route('list.search')}}" method="POST">
   @csrf
   <div class="form-outline mb-4" data-mdb-input-init>
-    <input type="text" class="form-control" id="datatable-search-input">
+    <input type="text" class="form-control" id="datatable-search-input" name="name" >
     <label class="form-label" for="datatable-search-input">ユーザー検索</label>
   </div>
   <div>
-    <label for="">日付検索</label>
+    <label>日付検索</label>
     <input type="date" name="from" placeholder="from_date" value="{{$from ?? ''}}">
     <span class="mx-3">~</span>
     <input type="date" name="until" placeholder="until_date" value="{{$until ?? ''}}">
-    <p>作成した期間で検索されます。</p>
+    <p>作成した日付で検索されます。</p>
   </div>
     <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
       <i class="fas fa-search"></i>
@@ -28,6 +28,7 @@
       <th>名前</th>
       <th>勤務日数</th>
       <th>休み希望日</th>
+      <th>コメント</th>
     </tr>
   </thead>
   <tbody>
@@ -60,10 +61,14 @@ $(document).ready(function(){
 
 function listResults(results){
   var datatable = $('#datatable');
-  results.foreach(function(result){
-    datatable.append('<th>'+result.name+'</th>'+'<th>'+result.type_id+'</th>'+'<th>'+result.data+'</th>');
+  if(Array.isArray(results) && results.length > 0){
+  results.forEach(function(result){
+    datatable.append('<td>'+result.user_name+'</td>'+'<td>'+result.type_name+'</td>'+'<td>'+result.data+'</td>'+'<td>'+result.comment+'</td>');
   });
+}else{
+  datatable.append('<td colspan="4">一致するデータがありません</td>');
 }
+};
 });
 </script>
 

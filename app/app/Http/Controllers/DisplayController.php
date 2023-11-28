@@ -84,11 +84,15 @@ class DisplayController extends Controller
         $until = $request->input('until');
         $name = $request->input('name');
 
-        $query = DB::table('wishes')->select('*');
+        $query = DB::table('wishes')->select('wishes.comment','wishes.date','users.name as user_name','types.name as type_name')->join('users',
+        'wishes.user_id','=','users.id')->join('types','wishes.type_id','=','types.id');
+
         if($name){
-            $query->where('user_name','like','%'.$name.'%');
+            $query->where('users.name','like','%'.$name.'%');
+        }elseif($name == '' || !$name){
+            $query->select('wishes.comment','wishes.date','users.name as user_name','types.name as type_name');
         }
-        $query->whereBetween('created_at',[$from,$until]);
+        $query->whereBetween('wishes.created_at',[$from,$until]);
 
         $results = $query->get();
         return response()->json(['results' => $results]);
