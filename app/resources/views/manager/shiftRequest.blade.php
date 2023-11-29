@@ -50,6 +50,7 @@ $(document).ready(function(){
       type:'POST',
       url:'{{route("list.search")}}',
       data:formData,
+      dataType:'json',
       success:function(data){
         listResults(data.results);
       },

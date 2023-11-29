@@ -89,9 +89,8 @@ class DisplayController extends Controller
 
         if($name){
             $query->where('users.name','like','%'.$name.'%');
-        }elseif($name == '' || !$name){
-            $query->select('wishes.comment','wishes.date','users.name as user_name','types.name as type_name');
         }
+        
         $query->whereBetween('wishes.created_at',[$from,$until]);
 
         $results = $query->get();
