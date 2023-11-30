@@ -5,7 +5,14 @@
 <p>ユーザー名を入力して検索できます。</p>
   <p>全ユーザーの情報を表示する場合は、下記は入力しないでください。</p>
 </div>
-<form id="searchForm" action="{{route('list.search')}}" method="POST">
+  @if($errors->any())
+    <div class="alert alert-danger">
+      @foreach($errors->all() as $message)
+        <p>{{$message}}</p>
+      @endforeach
+    </div>
+  @endif
+<form id="searchForm">
   @csrf
   <div class="form-outline mb-4" data-mdb-input-init>
     <input type="text" class="form-control" id="datatable-search-input" name="name" >
@@ -13,16 +20,16 @@
   </div>
   <div>
     <label>日付検索</label>
-    <input type="date" name="from" placeholder="from_date" value="{{$from ?? ''}}">
+    <input type="date" name="from" placeholder="from_date" value="{{$from ?? ''}}" required>
     <span class="mx-3">~</span>
-    <input type="date" name="until" placeholder="until_date" value="{{$until ?? ''}}">
+    <input type="date" name="until" placeholder="until_date" value="{{$until ?? ''}}" required>
     <p>作成した日付で検索されます。</p>
   </div>
     <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
       <i class="fas fa-search"></i>
     </button>
 </form>
-<table class="table align-middle mb-0 bg-white">
+<table class="table align-middle mb-0 bg-white" id="nodata">
   <thead class="bg-light">
     <tr>
       <th>名前</th>
@@ -31,12 +38,8 @@
       <th>コメント</th>
     </tr>
   </thead>
-  <tbody>
-  <tr>
-  <div id="datatable">
-    
-  </div>
-  </tr>
+  <tbody id="datatable">
+
   </tbody>
 </table>
 
@@ -62,14 +65,18 @@ $(document).ready(function(){
 
 function listResults(results){
   var datatable = $('#datatable');
+  var nodata = $('#nodata');
+  datatable.empty();
   if(Array.isArray(results) && results.length > 0){
   results.forEach(function(result){
-    datatable.append('<td>'+result.user_name+'</td>'+'<td>'+result.type_name+'</td>'+'<td>'+result.data+'</td>'+'<td>'+result.comment+'</td>');
+    datatable.append('<tr><td>'
+    +result.user_name+'</td>'+'<td>'+result.type_name+'</td>'+'<td>'
+    +result.data+'</td>'+'<td>'+result.comment+'</td></td>');
   });
 }else{
-  datatable.append('<td colspan="4">一致するデータがありません</td>');
+    nodata.append('<tr><td colspan="4">一致するデータがありません。</td></tr>');
+  }
 }
-};
 });
 </script>
 

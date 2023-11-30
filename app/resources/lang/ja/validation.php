@@ -42,7 +42,7 @@ return [
     'email' => ':attribute は正しい形式で入力してください。',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'exists' => 'The selected :attribute is invalid.',
-    'file' => 'The :attribute must be a file.',
+    'file' => ' :attribute はファイルでなければなりません。',
     'filled' => 'The :attribute field must have a value.',
     'gt' => [
         'numeric' => 'The :attribute must be greater than :value.',
@@ -156,6 +156,9 @@ return [
         'title' => 'タイトル',
         'text' => 'コメント',
         'image' => '画像',
+        'shiftfile' => 'シフトのファイル',
+        'year' => '年(西暦)',
+        'month' => '月',
     ],
 
 ];

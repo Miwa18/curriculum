@@ -8,6 +8,7 @@ use App\Posting;
 use App\Wish;
 use App\Http\Requests\NewRegi;
 use App\Http\Requests\PostRequest;
+use App\Http\Requests\ShiftFile;
 use App\Http\Requests\EditUser;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,7 @@ class RegistrationController extends Controller
             return redirect()->back()->withInput();
         }
     }
-       
+      //投稿内容をDBに登録 
     public function post(PostRequest $request){
         $image = $request->file('image');
         $path = isset($image) ? $image->store('items','public') : '';
@@ -103,6 +104,25 @@ class RegistrationController extends Controller
             return redirect(route('logIn'));
         }else{
             session()->flash('flash.error','登録に失敗しました。');
+            return redirect()->back()->withInput();
+        }
+    }
+    //シフト登録
+    public function shiftPost(ShiftFile $request){
+        $shift = $request->file('shiftfile');
+        $path = isset($shift) ? $shift->store('shifts','public') : '';
+
+        $result = Shift::create([
+            'year' => $request->year,
+            'month' => $request->month,
+            'shift' => $path,
+        ]);
+
+        if($result){
+            session()->flash('flash.success','投稿が成功しました。');
+            return redirect(route('main'));;
+        }else{
+            session()->flash('flash.error','投稿に失敗しました。');
             return redirect()->back()->withInput();
         }
     }

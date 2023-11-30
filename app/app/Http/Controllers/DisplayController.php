@@ -96,4 +96,19 @@ class DisplayController extends Controller
         $results = $query->get();
         return response()->json(['results' => $results]);
     }
+    //従業員シフト確認ページへ遷移
+    public function shiftShow(){
+        return view('member/shift');
+    }
+    //シフトをAjaxで表示
+    public function shiftSearch(Request $request){
+        $year = $request->input('year');
+        $month = $request->input('month');
+
+        $query = Shift::all();
+        $query->where('year','=',$year)->where('month','=',$month);
+        
+        $results=$query->get();
+        return response()->json(['results' => $results]);
+    }
 }

@@ -27,6 +27,7 @@ Route::group(['middleware' => 'admin'],function(){
     Route::get('/shift_make',[DisplayController::class,'shiftMain'])->name('shift.main');
     Route::get('/shift_list',[DisplayController::class,'shiftList'])->name('shift.list');
     Route::post('list_search',[DisplayController::class,'search'])->name('list.search');
+    Route::post('/shift_done',[RegistrationController::class,'shiftPost'])->name('shift.post');
 });
 
     Route::get('/logIn',[DisplayController::class,'logIn'])->name('logIn');  
@@ -37,6 +38,8 @@ Route::group(['middleware' => 'admin'],function(){
 Route::group(['middleware' => 'member'],function(){
     Route::get('/user_request',[DisplayController::class,'userRequest'])->name('user.request');
     Route::post('/user_request_done',[RegistrationController::class,'shiftRequest'])->name('shift.request');
+    Route::get('/shift',[DisplayController::class,'shiftShow'])->name('shift.show');
+    Route::post('shift_show',[DisplayController::class,'shiftRequest'])->name('shift.search');
     });
 Route::post('/post/ajax',[DisplayController::class,'postAddAjax'])->name('postAj');
 });

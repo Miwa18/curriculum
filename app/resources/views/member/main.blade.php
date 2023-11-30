@@ -4,7 +4,7 @@
 <div class="text-center">
 <div class="list-group list-group-light">
   <a href="{{route('user.request')}}" class="list-group-item list-group-item-action px-3 border-0">シフト希望提出</a>
-  <a href="#" class="list-group-item list-group-item-action px-3 border-0">シフト確認へ</a>
+  <a href="{{route('shift.show')}}" class="list-group-item list-group-item-action px-3 border-0">シフト確認へ</a>
   <div class="card mb-3 w-75 mx-auto" id="postScroll" >
     <h5>お知らせ</h5>
     <div id="dataMenu">
