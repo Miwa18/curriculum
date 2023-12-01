@@ -54,13 +54,16 @@ $(document).ready(function(){
 function shiftResults(results){
   var datatable = $('#resultshift');
   datatable.empty();
-  if(Array.isArray(results) && results.length > 0){
-    resultshift.append('<img src="/storage/${results.file}" class="card-img-bottom" alt="写真" width="50%">');
-  
-}else{
-    resultshift.append('<p>データがありません。</p>');
+  if(results){
+    var pdf = 'https://docs.google.com/viewer?url=' + encodeURIComponent('/storage/app/public/'+results) 
+    + '&embedded=true';
+    var html = '<iframe src="' + pdf + '"></iframe>';
+    datatable.append(html);
+   
+    }else{
+    datatable.append('<p>データがまだありません。</p>');
   }
-}
+};
 });
 </script>
 

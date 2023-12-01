@@ -39,7 +39,7 @@ Route::group(['middleware' => 'member'],function(){
     Route::get('/user_request',[DisplayController::class,'userRequest'])->name('user.request');
     Route::post('/user_request_done',[RegistrationController::class,'shiftRequest'])->name('shift.request');
     Route::get('/shift',[DisplayController::class,'shiftShow'])->name('shift.show');
-    Route::post('shift_show',[DisplayController::class,'shiftRequest'])->name('shift.search');
+    Route::post('shift_show',[DisplayController::class,'shiftSearch'])->name('shift.search');
     });
 Route::post('/post/ajax',[DisplayController::class,'postAddAjax'])->name('postAj');
 });

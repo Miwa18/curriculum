@@ -15,7 +15,7 @@
             </div>
         @endif
     <div class="d-flex justify-content-center">
-        <form method="POST" action="{{route('shift.post')}}">
+        <form method="POST" action="{{route('shift.post')}}" enctype="multipart/form-data" >
         @csrf
         <label for="year">西暦 年:</label>
         <select name="year" id="year">

@@ -105,7 +105,7 @@ class DisplayController extends Controller
         $year = $request->input('year');
         $month = $request->input('month');
 
-        $query = Shift::all();
+        $query = DB::table('shifts');
         $query->where('year','=',$year)->where('month','=',$month);
         
         $results=$query->get();

@@ -71,7 +71,7 @@ function listResults(results){
   results.forEach(function(result){
     datatable.append('<tr><td>'
     +result.user_name+'</td>'+'<td>'+result.type_name+'</td>'+'<td>'
-    +result.data+'</td>'+'<td>'+result.comment+'</td></td>');
+    +JSON.stringify(result.date)+'</td>'+'<td>'+result.comment+'</td></td>');
   });
 }else{
     nodata.append('<tr><td colspan="4">一致するデータがありません。</td></tr>');

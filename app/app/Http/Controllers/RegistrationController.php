@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Posting;
 use App\Wish;
+use App\Shift;
 use App\Http\Requests\NewRegi;
 use App\Http\Requests\PostRequest;
 use App\Http\Requests\ShiftFile;
@@ -110,12 +111,12 @@ class RegistrationController extends Controller
     //シフト登録
     public function shiftPost(ShiftFile $request){
         $shift = $request->file('shiftfile');
-        $path = isset($shift) ? $shift->store('shifts','public') : '';
+        $path = $shift->store('shifts','public');
 
         $result = Shift::create([
             'year' => $request->year,
             'month' => $request->month,
-            'shift' => $path,
+            'shiftfile' => $path,
         ]);
 
         if($result){
