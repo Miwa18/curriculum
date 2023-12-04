@@ -106,9 +106,13 @@ class DisplayController extends Controller
         $month = $request->input('month');
 
         $query = DB::table('shifts');
-        $query->where('year','=',$year)->where('month','=',$month);
+        $result = $query->where('year','=',$year)->where('month','=',$month)->first();
+        if($result){
+        $pdfPath = "http://localhost/storage/{$result->shiftfile}";
         
-        $results=$query->get();
-        return response()->json(['results' => $results]);
+        return response()->json(['result' => $pdfPath]);
+        }else{
+            return response()->json(['error' => 'データがありません'],404);
+        }
     }
 }

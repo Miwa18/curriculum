@@ -43,25 +43,33 @@ $(document).ready(function(){
       data:formData,
       dataType:'json',
       success:function(data){
-        shiftResults(data.results);
+        if(data.result){
+        shiftResults(data.result);
+        }else{
+          $('#resultshift').append('<p>記録がありませんでした。</p>');
+        }
       },
-      error:function(error){
-        console.log(error);
+      error:function(xhr,status,error){
+        if(xhr.status === 404){
+          $('#resultshift').append('<p>記録がありませんでした。</p>');
+        }else{
+          $('#resultshift').append('<p>エラーが発生しました。</p>');
+          console.log('エラーが発生しました。:',error);
+        }
       }
     });
   });
 
-function shiftResults(results){
+function shiftResults(result){
   var datatable = $('#resultshift');
   datatable.empty();
-  if(results){
-    var pdf = 'https://docs.google.com/viewer?url=' + encodeURIComponent('/storage/app/public/'+results) 
-    + '&embedded=true';
-    var html = '<iframe src="' + pdf + '"></iframe>';
+  if(result){
+    var pdfPath = result;
+    var html = '<embed src="'+pdfPath+'" type="application/pdf" width="100%" height="600px" >';
     datatable.append(html);
-   
     }else{
     datatable.append('<p>データがまだありません。</p>');
+    console.log(result);
   }
 };
 });

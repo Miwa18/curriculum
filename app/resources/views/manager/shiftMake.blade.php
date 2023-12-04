@@ -30,11 +30,12 @@
             @endfor
         </select>
         <div class="form-check  mb-4">
-            <label class="form-label" for="customFile">画像を添付</label>
+            <label class="form-label" for="customFile">資料を登録</label>
             <input type="file" class="form-control" id="customFile" name="shiftfile" />
         </div>
             <button type="submit" class="btn btn-primary">作成資料のアップロード</button>
         </form>
     </div>
+    <p>※資料はpdf形式で登録してください。</p>
 </div>
 @endsection

@@ -26,7 +26,7 @@ class ShiftFile extends FormRequest
         return [
             'year' => 'required',
             'month' => 'required',
-            'shiftfile' => 'file|mimes:jpeg,jpg,png,pdf,gif,svg,xlsx,docx',
+            'shiftfile' => 'file|mimes:pdf',
         ];
     }
 }

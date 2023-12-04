@@ -67,11 +67,20 @@ function listResults(results){
   var datatable = $('#datatable');
   var nodata = $('#nodata');
   datatable.empty();
+  
   if(Array.isArray(results) && results.length > 0){
   results.forEach(function(result){
+    if(result.date !== null){
+    var dateArray = JSON.parse(result.date);
+  var cleanDateArray = dateArray.map(function(date){
+    return date.replace(/[^0-9,-]/g,'');
+  });
+  }else{
+    cleanDateArray = '';
+  }
     datatable.append('<tr><td>'
     +result.user_name+'</td>'+'<td>'+result.type_name+'</td>'+'<td>'
-    +JSON.stringify(result.date)+'</td>'+'<td>'+result.comment+'</td></td>');
+    +cleanDateArray+'</td>'+'<td>'+result.comment+'</td></td>');
   });
 }else{
     nodata.append('<tr><td colspan="4">一致するデータがありません。</td></tr>');
